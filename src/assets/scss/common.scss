@@ -1,0 +1,48 @@
+/**
+ * 文本截断 - text ellipsis
+ * @param  {integer} $num [文本截断的行数]
+ */
+@mixin text-line($num: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @if $num==1 {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $num;
+    -webkit-box-orient: vertical;
+  }
+}
+
+//模块投影
+@mixin box-shadow() {
+  // box-shadow: 2px 0 2px #221815;
+  box-shadow: 0px 2px 2px 0px rgba(34, 24, 21, 0.04);
+}
+
+/**
+ * 引用图片，自动获取图片的 background-size
+ * @param  {string} $img-url [图片的路径]
+ * @param  {string} $img-name [图片的名字]
+ */
+@mixin bg($img-name, $img-url: "../../assets/images/") {
+  background-image: url($img-url+$img-name);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+/**
+ * 遮罩层
+ * @param  {string} $bgColor 颜色
+ * @param  {string} $z-index 层级
+ */
+@mixin mask($bgColor: rgba(0, 0, 0, 0.4), $z-index: 100) {
+  background-color: $bgColo;
+  position: fixed;
+  z-index: $z-index;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
