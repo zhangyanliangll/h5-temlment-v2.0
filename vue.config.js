@@ -208,7 +208,7 @@ module.exports = {
       '/api': {
         target: 'http://47.107.51.75:8081',
         changeOrigin: true,
-        secure: false, //如果是http接口，需要配置该参数
+        secure: false, //如果是https接口，需要配置该参数
         pathRewrite: {
           '^/api': ''
         }

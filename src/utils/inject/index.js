@@ -51,6 +51,27 @@ inject(String.prototype, 'phoneSpace', function () {
   return this.replace(/(\d{3})(\d{4})/, '$1 $2 ');
 });
 
+/**
+ * 数字格式化, 保留两位小数点, 且大于0
+ */
+inject(String.prototype, 'floatFormater', function (num) {
+  num = String(num)
+  num = num.replace(/^\./g, '')
+  num = num.replace(/[^\d.]/g, '') //清除数字和‘.’以外的字符
+  num = num.replace(/\.{2,}/g, '.') //只保留第一个，清楚多余的
+  num = num
+    .replace('.', '$#$')
+    .replace(/\./g, '')
+    .replace('$#$', '.')
+  // eslint-disable-next-line no-useless-escape
+  num = num.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3') //只能输入两个小数
+  if (num.indexOf('.') < 0 && num != '') {
+    //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+    num = String(parseFloat(num))
+  }
+  return num
+});
+
 //将字符串中的key给整出来，通常用于url里面的key=value value获取
 inject(String.prototype, 'query', function (key) {
   let _result = {};
