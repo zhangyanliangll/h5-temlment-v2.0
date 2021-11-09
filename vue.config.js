@@ -2,12 +2,9 @@
  * vue.config 配置
  */
 const { isDev, notDev, isPro } = require('./src/config/env');
-
 const CompressionPlugin = require('compression-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-
 const path = require('path')
-
 const resolve = dir => {
   return path.join(__dirname, dir)
 }
@@ -39,7 +36,6 @@ module.exports = {
 
   chainWebpack: (config) => {
 
-    // 代码分离
     if (notDev) {
       // 修改原html plugin配置
       config.plugin('html').tap((args) => {
@@ -61,8 +57,7 @@ module.exports = {
         })
         return args;
       });
-
-
+      // 代码分离
       config
         .optimization
         .minimize(true) // js文件最小化处理
