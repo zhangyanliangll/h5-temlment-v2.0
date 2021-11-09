@@ -2,29 +2,14 @@
  * vue.config 配置
  */
 const { isDev, notDev, isPro } = require('./src/config/env');
+
 const CompressionPlugin = require('compression-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 const path = require('path')
+
 const resolve = dir => {
   return path.join(__dirname, dir)
-}
-
-//  自定义设置
-const customImgLoaderOptions = {
-  mozjpeg: {
-    progressive: true,
-    quality: 50
-  },
-  optipng: {
-    enabled: true
-  },
-  pngquant: {
-    quality: [0.5, 0.65],
-    speed: 4
-  },
-  gifsicle: {
-    interlaced: false
-  }
 }
 
 module.exports = {
@@ -53,15 +38,6 @@ module.exports = {
   },
 
   chainWebpack: (config) => {
-    // 图片压缩(仅非开发环境)
-    if (isPro) {
-      config.module.rule('images')
-        .test(/\.(gif|png|jpe?g|svg)$/i)
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options(customImgLoaderOptions)
-        .end()
-    }
 
     // 代码分离
     if (notDev) {
