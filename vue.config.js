@@ -41,6 +41,28 @@ module.exports = {
 
     // 代码分离
     if (notDev) {
+      // 修改原html plugin配置
+      config.plugin('html').tap((args) => {
+        args = args.map((item) => {
+          item.minify = {
+            //是否压缩html文件，为false则不压缩
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            keepClosingSlash: true,
+            minifyJS: true,
+            minifyCSS: true,
+            minifyURLs: true,
+          }
+          return item
+        })
+        return args;
+      });
+
+
       config
         .optimization
         .minimize(true) // js文件最小化处理
