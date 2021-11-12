@@ -7,8 +7,17 @@ import mixin from '@/mixins'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 
+import { notPro } from '@/config'
+
 import '@/utils/inject'
 import * as filters from '@/filters'
+
+// 打印日志 ---
+import VConsole from 'vconsole'
+if (notPro) {
+  // eslint-disable-next-line no-unused-vars
+  const vs = new VConsole()
+}
 
 // import dayjs from 'dayjs'; //导入模块
 // dayjs.locale('zh-cn'); //设置语言 或 dayjs.lang('zh-cn');
